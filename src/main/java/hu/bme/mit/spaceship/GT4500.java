@@ -81,7 +81,7 @@ public class GT4500 implements SpaceShip {
         //TODO implement feature
 
         firingSuccess = fireTorpedo(FiringMode.SINGLE);
-        firingSuccess = fireTorpedo(FiringMode.SINGLE);
+       // firingSuccess = fireTorpedo(FiringMode.SINGLE);
 
         break;
     }
