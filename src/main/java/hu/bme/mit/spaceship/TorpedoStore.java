@@ -16,7 +16,7 @@ public class TorpedoStore {
 
   private int torpedoCount = 0;
 
-  
+
 
   public TorpedoStore(int numberOfTorpedos){
     this.torpedoCount = numberOfTorpedos;
@@ -32,7 +32,7 @@ public class TorpedoStore {
     }
   }
 
-  public boolean fire(int numberOfTorpedos) throws NoSuchAlgorithmException{
+  public boolean fire(int numberOfTorpedos){
     if(numberOfTorpedos < 1 || numberOfTorpedos > this.torpedoCount){
     throw new IllegalArgumentException("numberOfTorpedos");
     }
@@ -40,19 +40,26 @@ public class TorpedoStore {
     boolean success = false;
 
     // simulate random overheating of the launcher bay which prevents firing
-    Random rand = SecureRandom.getInstanceStrong();
-    double r = rand.nextDouble();
-
-    if (r >= FAILURE_RATE) {
-      // successful firing
-      this.torpedoCount -= numberOfTorpedos;
-      success = true;
-    } else {
-      // simulated failure
-      success = false;
+    try {
+      Random rand = SecureRandom.getInstanceStrong();
+      double r = rand.nextDouble();
+      if (r >= FAILURE_RATE) {
+        // successful firing
+        this.torpedoCount -= numberOfTorpedos;
+        success = true;
+      } else {
+        // simulated failure
+        success = false;
+      }
+  
+      return success;
+    } catch (NoSuchAlgorithmException e) {
+      e.getMessage();
     }
-
     return success;
+    
+    
+  
   }
 
   public boolean isEmpty(){
